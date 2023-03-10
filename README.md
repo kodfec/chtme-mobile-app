@@ -1,1 +1,1 @@
-# chtme-mobile-app
+# chatme-mobile-app
