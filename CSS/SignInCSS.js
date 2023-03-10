@@ -5,13 +5,16 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ECF2FF',
+    backgroundColor: '#EDF1D6',
   },
   signInbox: {
     width: 300,
     height: 400,
     borderRadius: 20,
     alignItems: 'center',
+    flexDirection:"column",
+    marginBottom:"30%",
+
   },
   signInInput1: {
     width: '90%',
@@ -27,16 +30,22 @@ const style = StyleSheet.create({
     start: 10,
   },
   signInView1: {
-    top:130,
+    top:90,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom:10,
   },
+  signInView2: {
+    top:90,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   signIn:{
-    top:80,
+    top:50,
+    fontSize:26,
+    padding:0,
   },
   chtme:{
-    bottom:60,
     fontSize:40,
     fontWeight:"bold",
     color:"#0008"
@@ -46,6 +55,57 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  signInbtn:{
+    top:"35%",
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"#8BF5FA",
+    width:"80%",
+    height:40,
+    borderRadius:20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 8,
+  },
+  signUpbtn:{
+    top:"40%",
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"#F9F54B",
+    width:"80%",
+    height:40,
+    borderRadius:20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 8,
+  },
+  icon:{
+    height:100,
+    width:100,
+
+  },
+  signInbtntext:{
+    fontSize:18,
+    fontWeight:"bold",
+    textTransform:"uppercase"
+  },
+  signUpbtntext:{
+    fontSize:18,
+    fontWeight:"bold",
+    textTransform:"uppercase"
+  }
 });
 
 export default style;

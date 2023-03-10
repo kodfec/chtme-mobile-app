@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {Image, SafeAreaView, Text} from 'react-native';
-import style from '../CSS/Main.js';
+import {Image, SafeAreaView, Text, View} from 'react-native';
+import style from '../CSS/Splash';
 
 function Main({navigation}) {
   useEffect(() => {
@@ -13,6 +13,12 @@ function Main({navigation}) {
 
   const ui = (
     <SafeAreaView style={style.Main}>
+      <Image source={require('../Images/icon.png')} style={style.icon} />
+      <Text style={style.chatme}>ChatMe</Text>
+      <View style={style.fromViwe}>
+        <Text style={style.from}>From</Text>
+        <Text style={style.virul}>virul.n</Text>
+      </View>
     </SafeAreaView>
   );
 

@@ -14,8 +14,8 @@ function App({navigation}) {
       <Stack.Navigator
         initialRouteName="Main Page"
         screenOptions={{
-          headerStyle: {backgroundColor: '#000080'},
-          headerTintColor: '#fff',
+          headerStyle: {backgroundColor: '#EDF1D6'},
+          headerTintColor: '#EDF1D6',
         }}>
         <Stack.Screen name=" " component={Main}  options={{ headerShown: false }} />
         <Stack.Screen name="Registration" component={Home}  options={{ headerShown: false }} />
