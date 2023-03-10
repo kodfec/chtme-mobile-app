@@ -1,17 +1,22 @@
-import {Alert, Image, Pressable, SafeAreaView, Text, TextInput, View} from 'react-native';
+import {Alert, Image, SafeAreaView, Text, TextInput, View} from 'react-native';
 import style from '../CSS/SignInCSS';
 import {Shadow} from 'react-native-shadow-2';
 import IconUser from 'react-native-vector-icons/Entypo';
 import {useState} from 'react';
 import {TouchableWithoutFeedback} from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 function SignIn({navigation}) {
+  const [showAlert, setShowAlert] = useState(false);
   const User = <IconUser name="user" size={18} color="#0008" />;
-  const adduser = <IconUser name='add-user' size={18} color="#0008"/>;
+  const adduser = <IconUser name="add-user" size={18} color="#0008" />;
   const [signInPressed, setSignInPressed] = useState(false);
   const [signUpPressed, setSignUpPressed] = useState(false);
+  const [validmsg, setValidMsg] = useState('');
+  const [msgTitle, setMsgTitle] = useState('');
+  const [conformBtn, setConformBtn] = useState('');
+  const [conformBtnColor, setConformBtnColor] = useState('');
+  const [titleColor, setTitleColor] = useState('');
   const handleSignInPressIn = () => {
     setSignInPressed(true);
   };
@@ -27,13 +32,13 @@ function SignIn({navigation}) {
   const handleSignUpPressOut = () => {
     setSignUpPressed(false);
   };
-  const [mobile,setmobile] = useState('');
-  const [Password,setPassword] = useState('')
+  const [mobile, setmobile] = useState(null);
+  const [Password, setPassword] = useState('');
 
   const ui = (
     <SafeAreaView style={style.Body}>
       <Text style={style.chtme}>ChatMe</Text>
-      <Image source={require('../Images/icon.png')} style={style.icon}/>
+      <Image source={require('../Images/icon.png')} style={style.icon} />
       <Shadow
         distance={15}
         startColor={'#00000010'}
@@ -61,14 +66,45 @@ function SignIn({navigation}) {
               onChangeText={setPassword}
             />
           </View>
+          <AwesomeAlert
+            show={showAlert}
+            title={msgTitle}
+            message={validmsg}
+            showConfirmButton={true}
+            confirmText={conformBtn}
+            confirmButtonColor={conformBtnColor}
+            onConfirmPressed={() => setShowAlert(false)}
+            titleStyle={{
+              fontWeight: 'bold',
+            }}
+          />
           <TouchableWithoutFeedback
-            onPress={()=>{
-              Alert.alert(mobile);
-              // Alert.alert(Password);
-              var form = new FormData();
-              form.append("mobile",mobile);
-              form.append("password",Password);
-          
+            onPress={() => {
+              setShowAlert(!showAlert);
+              if (mobile == '') {
+                setMsgTitle('Warning !');
+                setValidMsg('Type Your Mobile First');
+                setConformBtn('Retry');
+                setConformBtnColor('#ff3c38');
+                setTitleColor('red');
+              } else if (Password == '') {
+                setMsgTitle('Warning !');
+                setValidMsg('Type Your Password');
+                setConformBtn('Retry');
+                setConformBtnColor('#ff3c38');
+              } else {
+                var form = new FormData();
+                form.append('mobile', mobile);
+                form.append('password', Password);
+                setShowAlert(false);
+                var xhttps = new XMLHttpRequest();
+                xhttps.onreadystatechange = () => {
+                  if (xhttps.readyState == 4 && xhttps.status == 200) {
+                  }
+                };
+                xhttps.open();
+                xhttps.send(form);
+              }
             }}
             onPressIn={handleSignInPressIn}
             onPressOut={handleSignInPressOut}>
@@ -96,12 +132,11 @@ function SignIn({navigation}) {
         </View>
       </Shadow>
       <Text>Develope by Virul.n</Text>
-
     </SafeAreaView>
   );
-  return ui;
 
-  
+  function sendRequest() {}
+  return ui;
 }
 
 export default SignIn;
