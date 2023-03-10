@@ -16,7 +16,6 @@ function SignIn({navigation}) {
   const [msgTitle, setMsgTitle] = useState('');
   const [conformBtn, setConformBtn] = useState('');
   const [conformBtnColor, setConformBtnColor] = useState('');
-  const [titleColor, setTitleColor] = useState('');
   const handleSignInPressIn = () => {
     setSignInPressed(true);
   };
@@ -86,7 +85,6 @@ function SignIn({navigation}) {
                 setValidMsg('Type Your Mobile First');
                 setConformBtn('Retry');
                 setConformBtnColor('#ff3c38');
-                setTitleColor('red');
               } else if (Password == '') {
                 setMsgTitle('Warning !');
                 setValidMsg('Type Your Password');
@@ -100,9 +98,19 @@ function SignIn({navigation}) {
                 var xhttps = new XMLHttpRequest();
                 xhttps.onreadystatechange = () => {
                   if (xhttps.readyState == 4 && xhttps.status == 200) {
+                    // Alert.alert("Response",xhttps.responseText)
+                    setShowAlert(!showAlert);
+                    setMsgTitle('Done');
+                    setValidMsg(xhttps.responseText);
+                    setConformBtn('OK');
+                    setConformBtnColor('#ff3c38');
                   }
                 };
-                xhttps.open();
+                xhttps.open(
+                  'GET',
+                  'http://10.0.2.2/viva_react_cht/login.php',
+                  true,
+                );
                 xhttps.send(form);
               }
             }}
