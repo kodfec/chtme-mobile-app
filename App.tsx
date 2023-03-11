@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import ChatHome from './pages/ChatHome';
 import Home from './pages/Home';
 import Main from './pages/Main';
 import SignIn from './pages/SignIn';
@@ -21,6 +22,7 @@ function App({navigation}) {
         <Stack.Screen name="Registration" component={Home}  options={{ headerShown: false }} />
         <Stack.Screen name="SignIn" component={SignIn}  options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUp}  options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={ChatHome}  options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

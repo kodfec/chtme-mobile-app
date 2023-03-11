@@ -10,11 +10,19 @@ import {
 } from 'react-native';
 import style from '../CSS/Main';
 import IconUser from 'react-native-vector-icons/Entypo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 
 const AnimatedPage = ({navigation}) => {
+  async function checkuser() {
+    var user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      navigation.navigate('Home');
+    }
+  }
+  checkuser();
     const User = <IconUser name="user" size={20} color="#000" />;
     const adduser = <IconUser name='add-user' size={20} color="#000"/>;
 

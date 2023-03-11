@@ -5,11 +5,12 @@ import IconUser from 'react-native-vector-icons/Entypo';
 import {useState} from 'react';
 import {TouchableWithoutFeedback} from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn({navigation}) {
-  const [showAlert, setShowAlert] = useState(false);
   const User = <IconUser name="user" size={18} color="#0008" />;
   const adduser = <IconUser name="add-user" size={18} color="#0008" />;
+  const [showAlert, setShowAlert] = useState(false);
   const [signInPressed, setSignInPressed] = useState(false);
   const [signUpPressed, setSignUpPressed] = useState(false);
   const [validmsg, setValidMsg] = useState('');
@@ -76,6 +77,14 @@ function SignIn({navigation}) {
             titleStyle={{
               fontWeight: 'bold',
             }}
+            contentContainerStyle={{
+              width: '67%',
+            }}
+            confirmButtonStyle={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '30%',
+            }}
           />
           <TouchableWithoutFeedback
             onPress={() => {
@@ -95,19 +104,27 @@ function SignIn({navigation}) {
                 form.append('mobile', mobile);
                 form.append('password', Password);
                 setShowAlert(false);
+                function gotomain(){
+                  navigation.navigate('Home');
+                }
                 var xhttps = new XMLHttpRequest();
-                xhttps.onreadystatechange = () => {
+                xhttps.onreadystatechange = async () => {
                   if (xhttps.readyState == 4 && xhttps.status == 200) {
                     // Alert.alert("Response",xhttps.responseText)
+                    var jsobj = JSON.parse(xhttps.response);
+                    var user = jsobj.user;
+                    var storeData = JSON.stringify(user);
+                    await AsyncStorage.setItem('user', storeData);
                     setShowAlert(!showAlert);
-                    setMsgTitle('Done');
-                    setValidMsg(xhttps.responseText);
-                    setConformBtn('OK');
-                    setConformBtnColor('#ff3c38');
+                    setMsgTitle(jsobj.titel);
+                    setValidMsg(jsobj.msg);
+                    setConformBtn(jsobj.btn);
+                    setConformBtnColor(jsobj.color);
+                    setInterval(gotomain,2000)
                   }
                 };
                 xhttps.open(
-                  'GET',
+                  'POST',
                   'http://10.0.2.2/viva_react_cht/login.php',
                   true,
                 );
@@ -126,7 +143,9 @@ function SignIn({navigation}) {
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
-            onPress={() => console.log('signUp')}
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
             onPressIn={handleSignUpPressIn}
             onPressOut={handleSignUpPressOut}>
             <View

@@ -22,10 +22,12 @@ const style = StyleSheet.create({
         top:"29%",
     },
     virul:{
+        color:"#000",
         fontSize:20,
         fontWeight:"bold"
     },
     from:{
+        color:"#000",
         start:"3.5%",
         fontSize:10,
     }
