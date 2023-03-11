@@ -8,12 +8,12 @@ const style = StyleSheet.create({
     backgroundColor: '#EDF1D6',
   },
   signInbox: {
-    width: 300,
-    height: 500,
+    width: 350,
+    height: 570,
     borderRadius: 20,
     alignItems: 'center',
     flexDirection:"column",
-    marginBottom:"30%",
+    marginBottom:"10%",
 
   },
   signInInput1: {
@@ -24,25 +24,39 @@ const style = StyleSheet.create({
     paddingStart: 35,
     borderRadius: 20,
   },
+  dropDown: {
+    backgroundColor:"#EDF1D6",
+    width: '90%',
+    height: 45,
+    fontSize: 15,
+    borderWidth: 1,
+    paddingStart: 35,
+    borderRadius: 20,
+  },
   signInIcon1: {
     fontSize: 20,
-    position: 'absolute',
-    start: 10,
+    position:"relative",
+    start: 31,
+    zIndex:100
   },
   signInView1: {
     top:90,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom:10,
+    start:-10,
+
   },
   signInView2: {
     top:90,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom:10,
+    start:-10,
 
   },
   signIn:{
+    fontWeight:"bold",
     top:50,
     fontSize:26,
     padding:0,
@@ -58,7 +72,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   signInbtn:{
-    top:"28%",
+    top:"16%",
     justifyContent:"center",
     alignItems:"center",
     backgroundColor:"#8BF5FA",
@@ -76,7 +90,7 @@ const style = StyleSheet.create({
     elevation: 8,
   },
   signUpbtn:{
-    top:"30%",
+    top:"18%",
     justifyContent:"center",
     alignItems:"center",
     backgroundColor:"#F9F54B",
@@ -107,6 +121,14 @@ const style = StyleSheet.create({
     fontSize:18,
     fontWeight:"bold",
     textTransform:"uppercase"
+  },
+  profilebtn:{
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"blue",
+    height:45,
+    width:160,
+    borderRadius:10,
   }
 });
 

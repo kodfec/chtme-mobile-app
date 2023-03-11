@@ -54,6 +54,8 @@ function SignIn({navigation}) {
               maxLength={10}
               placeholder="Your Mobile"
               onChangeText={setmobile}
+              placeholderTextColor={"#0008"}
+
             />
           </View>
           <View style={style.signInView2}>
@@ -64,6 +66,7 @@ function SignIn({navigation}) {
               placeholder="Your Password"
               secureTextEntry={true}
               onChangeText={setPassword}
+              placeholderTextColor={"#0008"}
             />
           </View>
           <AwesomeAlert

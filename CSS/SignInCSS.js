@@ -8,7 +8,7 @@ const style = StyleSheet.create({
     backgroundColor: '#EDF1D6',
   },
   signInbox: {
-    width: 300,
+    width: 350,
     height: 400,
     borderRadius: 20,
     alignItems: 'center',
@@ -41,6 +41,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   signIn:{
+    fontWeight:"bold",
     top:50,
     fontSize:26,
     padding:0,

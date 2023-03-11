@@ -1,11 +1,20 @@
-import {Alert, Image, SafeAreaView, Text, TextInput, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import style from '../CSS/SignUp';
 import {Shadow} from 'react-native-shadow-2';
 import IconUser from 'react-native-vector-icons/Entypo';
 import {useState} from 'react';
 import {TouchableWithoutFeedback} from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SelectDropdown from 'react-native-select-dropdown';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 function SignUp({navigation}) {
   const User = <IconUser name="user" size={18} color="#0008" />;
@@ -17,6 +26,8 @@ function SignUp({navigation}) {
   const [msgTitle, setMsgTitle] = useState('');
   const [conformBtn, setConformBtn] = useState('');
   const [conformBtnColor, setConformBtnColor] = useState('');
+  const countries = ['Egypt', 'Canada', 'Australia', 'Ireland'];
+
   const handleSignInPressIn = () => {
     setSignInPressed(true);
   };
@@ -32,8 +43,33 @@ function SignUp({navigation}) {
   const handleSignUpPressOut = () => {
     setSignUpPressed(false);
   };
-  const [mobile, setmobile] = useState(null);
+  const [name, Setname] = useState('');
+  const [mobile, setmobile] = useState('');
   const [Password, setPassword] = useState('');
+  const [ConfromPassword, SetConformPassword] = useState('');
+  const [Country, SetCountry] = useState('');
+  const [ProfileImg, SetProfileImage] = useState('');
+
+  async function openGallery() {
+    const options = {
+      mediaType: 'photo',
+    };
+    const result = await launchImageLibrary(options);
+    if (result.didCancel) {
+      setShowAlert(!showAlert);
+      setMsgTitle('Warning !');
+      setValidMsg("You didn't select Profile image");
+      setConformBtn('Retry');
+      setConformBtnColor('#ff3c38');
+    } else {
+      var image = {
+        uri: result.assets[0].uri,
+        name: 'profile.png',
+        type: 'image/png',
+      };
+        SetProfileImage(image)
+    }
+  }
 
   const ui = (
     <SafeAreaView style={style.Body}>
@@ -50,10 +86,20 @@ function SignUp({navigation}) {
             <IconUser style={style.signInIcon1} name="user" />
             <TextInput
               style={style.signInInput1}
-              keyboardType={'numeric'}
               maxLength={10}
               placeholder="Your Name"
+              onChangeText={Setname}
+              placeholderTextColor={'#0008'}
+            />
+          </View>
+          <View style={style.signInView2}>
+            <IconUser style={style.signInIcon1} name="mobile" />
+            <TextInput
+              style={style.signInInput1}
+              maxLength={20}
+              placeholder="Your Mobile"
               onChangeText={setmobile}
+              placeholderTextColor={'#0008'}
             />
           </View>
           <View style={style.signInView2}>
@@ -64,27 +110,41 @@ function SignUp({navigation}) {
               placeholder="Your Password"
               secureTextEntry={true}
               onChangeText={setPassword}
+              placeholderTextColor={'#0008'}
             />
           </View>
           <View style={style.signInView2}>
-            <IconUser style={style.signInIcon1} name="lock" />
+            <IconUser style={style.signInIcon1} name="lock-open" />
             <TextInput
               style={style.signInInput1}
               maxLength={20}
-              placeholder="Your Password"
+              placeholder="Confrom Your Password"
               secureTextEntry={true}
-              onChangeText={setPassword}
+              onChangeText={SetConformPassword}
+              placeholderTextColor={'#0008'}
+            />
+          </View>
+
+          <View style={style.signInView2}>
+            <IconUser style={style.signInIcon1} name="globe" />
+            <SelectDropdown
+              buttonStyle={style.dropDown}
+              defaultButtonText={'Select Your Country'}
+              buttonTextStyle={{
+                start: 37,
+                color: '#0008',
+                fontSize: 15,
+              }}
+              data={countries}
+              onSelect={(selectedItem, index) => {
+                SetCountry(selectedItem);
+              }}
             />
           </View>
           <View style={style.signInView2}>
-            <IconUser style={style.signInIcon1} name="lock" />
-            <TextInput
-              style={style.signInInput1}
-              maxLength={20}
-              placeholder="Your Password"
-              secureTextEntry={true}
-              onChangeText={setPassword}
-            />
+            <TouchableOpacity style={style.profilebtn} onPress={openGallery}>
+              <Text>Select your profile pic</Text>
+            </TouchableOpacity>
           </View>
           <AwesomeAlert
             show={showAlert}
