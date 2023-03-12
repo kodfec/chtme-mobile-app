@@ -125,10 +125,13 @@ const style = StyleSheet.create({
   profilebtn:{
     justifyContent:"center",
     alignItems:"center",
-    backgroundColor:"blue",
+    backgroundColor:"#DC8449",
     height:45,
-    width:160,
+    width:180,
     borderRadius:10,
+  },
+  profiletext:{
+    fontWeight:"bold"
   }
 });
 

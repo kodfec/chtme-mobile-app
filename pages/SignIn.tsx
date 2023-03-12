@@ -32,7 +32,7 @@ function SignIn({navigation}) {
   const handleSignUpPressOut = () => {
     setSignUpPressed(false);
   };
-  const [mobile, setmobile] = useState(null);
+  const [mobile, setmobile] = useState('');
   const [Password, setPassword] = useState('');
 
   const ui = (
@@ -54,8 +54,7 @@ function SignIn({navigation}) {
               maxLength={10}
               placeholder="Your Mobile"
               onChangeText={setmobile}
-              placeholderTextColor={"#0008"}
-
+              placeholderTextColor={'#0008'}
             />
           </View>
           <View style={style.signInView2}>
@@ -66,7 +65,7 @@ function SignIn({navigation}) {
               placeholder="Your Password"
               secureTextEntry={true}
               onChangeText={setPassword}
-              placeholderTextColor={"#0008"}
+              placeholderTextColor={'#0008'}
             />
           </View>
           <AwesomeAlert
@@ -107,7 +106,7 @@ function SignIn({navigation}) {
                 form.append('mobile', mobile);
                 form.append('password', Password);
                 setShowAlert(false);
-                function gotomain(){
+                function gotomain() {
                   navigation.navigate('Home');
                 }
                 var xhttps = new XMLHttpRequest();
@@ -116,14 +115,20 @@ function SignIn({navigation}) {
                     // Alert.alert("Response",xhttps.responseText)
                     var jsobj = JSON.parse(xhttps.response);
                     var user = jsobj.user;
-                    var storeData = JSON.stringify(user);
-                    await AsyncStorage.setItem('user', storeData);
+                    if (jsobj.msg == 'Loging Failed Check Your credential') {
+                      await AsyncStorage.setItem('user', '0');
+                    } else {
+                      var storeData = JSON.stringify(user);
+                      await AsyncStorage.setItem('user', storeData);
+                    }
                     setShowAlert(!showAlert);
                     setMsgTitle(jsobj.titel);
                     setValidMsg(jsobj.msg);
                     setConformBtn(jsobj.btn);
                     setConformBtnColor(jsobj.color);
-                    setInterval(gotomain,2000)
+                    if (jsobj.msg == 'Loging Sucess') {
+                      setInterval(gotomain, 2000);
+                    }
                   }
                 };
                 xhttps.open(
