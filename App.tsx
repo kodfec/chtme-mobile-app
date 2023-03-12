@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import Header from './components/Header';
 import ChatHome from './pages/ChatHome';
 import Home from './pages/Home';
 import Main from './pages/Main';
@@ -28,4 +29,4 @@ function App({navigation}) {
   );
 }
 
-export default App;
+export default Header;

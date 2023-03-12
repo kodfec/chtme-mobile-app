@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   SafeAreaView,
   Text,
@@ -254,7 +253,7 @@ function SignUp({navigation}) {
                 form.append('country', Country);
                 form.append('profileImage', ProfileImg);
                 function gotomain() {
-                  navigation.navigate('Home');
+                  navigation.navigate('SignIn');
                 }
                 var xhttps = new XMLHttpRequest();
                 xhttps.onreadystatechange = () => {

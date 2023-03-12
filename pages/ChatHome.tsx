@@ -1,9 +1,12 @@
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
+import style from '../CSS/ChatHome';
 
-function ChatHome() {
+function ChatHome({navigation}) {
   const ui = (
-    <SafeAreaView>
-      <Text>Home</Text>
+    <SafeAreaView style={style.Main}>
+        <View >
+        <Text>Home</Text>
+        </View>
     </SafeAreaView>
   );
 
