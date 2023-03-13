@@ -2,6 +2,7 @@ const {StyleSheet} = require('react-native');
 
 const styles = StyleSheet.create({
   header: {
+    marginTop:15,
     height: 60,
     backgroundColor: '#EDF1D6',
     flexDirection: 'row',
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     start: 1,
     fontSize: 20,
+    color:"#0008"
   },
   modalWrapper: {
     flex: 1,
@@ -35,14 +37,6 @@ const styles = StyleSheet.create({
     bottom: 15,
     right: 15,
     maxWidth: '100%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
   },
   menuItem: {
     fontSize: 18,

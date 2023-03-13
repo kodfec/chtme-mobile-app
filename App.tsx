@@ -10,7 +10,7 @@ import SignUp from './pages/SignUp';
 
 const Stack = createNativeStackNavigator();
 
-function App({navigation}) {
+function App({navigation}:any) {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -29,4 +29,4 @@ function App({navigation}) {
   );
 }
 
-export default Header;
+export default App;

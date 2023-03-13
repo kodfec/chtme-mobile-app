@@ -13,7 +13,7 @@ const Header = () => {
       <TouchableOpacity
         style={{start: 220}}
         onPress={() => setIsMenuVisible(true)}>
-        <IconMenu name="dots-three-vertical" size={24} />
+        <IconMenu name="dots-three-vertical" size={22} style={{color:"#0008"}} />
       </TouchableOpacity>
 
       <Modal animationType="slide" transparent visible={isMenuVisible}>

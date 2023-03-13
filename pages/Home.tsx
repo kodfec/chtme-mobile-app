@@ -1,12 +1,9 @@
 import {useEffect, useRef} from 'react';
 import {
-  Alert,
   Animated,
-  Image,
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import style from '../CSS/Main';
 import IconUser from 'react-native-vector-icons/Entypo';
@@ -18,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const AnimatedPage = ({navigation}) => {
   async function checkuser() {
     var user = await AsyncStorage.getItem('user');
-    if (user != null) {
+    if (user !== null) {
       navigation.navigate('Home');
     }
   }
