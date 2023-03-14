@@ -3,7 +3,7 @@ const {StyleSheet} = require('react-native');
 const style = StyleSheet.create({
   Main: {
     flex: 1,
-    backgroundColor: '#ECF2FF',
+    backgroundColor: '#EDF1D6',
   },
   searchare: {
     flexDirection: 'row',
@@ -48,17 +48,6 @@ const style = StyleSheet.create({
     // backgroundColor: 'green',
     width: '20%',
   },
-  msgCont:{
-    justifyContent:"center",
-    alignItems:"center",
-    backgroundColor:"#1ce600",
-    width:20,
-    width:20,
-    paddingHorizontal:5,
-    paddingHorizontal:5,
-    borderRadius:20,
-  }
-
 });
 
 export default style;

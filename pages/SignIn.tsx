@@ -107,7 +107,7 @@ function SignIn({navigation}) {
                 form.append('password', Password);
                 setShowAlert(false);
                 function gotomain() {
-                  navigation.navigate('Contact');
+                  navigation.navigate('Home');
                 }
                 var xhttps = new XMLHttpRequest();
                 xhttps.onreadystatechange = async () => {
@@ -127,7 +127,7 @@ function SignIn({navigation}) {
                     setConformBtn(jsobj.btn);
                     setConformBtnColor(jsobj.color);
                     if (jsobj.msg == 'Loging Sucess') {
-                      gotomain()
+                      setInterval(gotomain, 2000);
                     }
                   }
                 };
