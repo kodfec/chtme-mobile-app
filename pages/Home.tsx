@@ -1,27 +1,19 @@
 import {useEffect, useRef} from 'react';
-import {
-  Animated,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {Animated, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import style from '../CSS/Main';
 import IconUser from 'react-native-vector-icons/Entypo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
-
 const AnimatedPage = ({navigation}) => {
   async function checkuser() {
     var user = await AsyncStorage.getItem('user');
-    if (user !== null) {
-      navigation.navigate('Home');
+    if (user != null) {
+      navigation.navigate('Contact');
     }
   }
   checkuser();
-    const User = <IconUser name="user" size={20} color="#000" />;
-    const adduser = <IconUser name='add-user' size={20} color="#000"/>;
+  const User = <IconUser name="user" size={20} color="#000" />;
+  const adduser = <IconUser name="add-user" size={20} color="#000" />;
 
   const opacityAnimation = useRef(new Animated.Value(0)).current;
   const translateYAnimation = useRef(new Animated.Value(50)).current;
@@ -62,7 +54,11 @@ const AnimatedPage = ({navigation}) => {
           }}>
           <Text style={style.btnText}>{User} Sign In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.btn2} onPress={()=>{navigation.navigate('SignUp')}}>
+        <TouchableOpacity
+          style={style.btn2}
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}>
           <Text style={style.btnText}>{adduser} Sign Up</Text>
         </TouchableOpacity>
         <Text style={style.virul}>Develope by Virul.n</Text>
