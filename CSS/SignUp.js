@@ -5,7 +5,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EDF1D6',
+    backgroundColor: '#ECF2FF',
   },
   signInbox: {
     width: 350,
@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
   },
   dropDown: {
-    backgroundColor:"#EDF1D6",
+    backgroundColor:"#ECF2FF",
     width: '90%',
     height: 45,
     fontSize: 15,

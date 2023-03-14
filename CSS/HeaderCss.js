@@ -2,7 +2,8 @@ const {StyleSheet} = require('react-native');
 
 const styles = StyleSheet.create({
   header: {
-    marginTop:15,
+    marginTop:1,
+    marginBottom:10,
     height: 60,
     backgroundColor: '#EDF1D6',
     flexDirection: 'row',
