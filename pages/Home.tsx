@@ -11,7 +11,7 @@ const AnimatedPage = ({navigation}) => {
       navigation.navigate('Contact');
     }
   }
-  checkuser();
+  setTimeout(checkuser,2000);
   const User = <IconUser name="user" size={20} color="#000" />;
   const adduser = <IconUser name="add-user" size={20} color="#000" />;
 

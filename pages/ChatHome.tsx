@@ -1,6 +1,8 @@
 import {
+  Alert,
   FlatList,
   Image,
+  Pressable,
   SafeAreaView,
   Text,
   TextInput,
@@ -14,9 +16,7 @@ import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ChatHome({navigation}) {
-    const check = <Icon name="check" size={15} style={{color: '#0008'}} />
-
-  const [item, Setitem] = useState([1, 2, 3]);
+  const [item, Setitem] = useState([1, 2]);
 
   async function chtLoad() {
     const userJSON = await AsyncStorage.getItem('user');
@@ -47,27 +47,22 @@ function ChatHome({navigation}) {
           <Icon name="search1" size={24} style={{color: '#0008'}} />
         </TouchableOpacity>
       </View>
-      <FlatList renderItem={chatItemUi} data={item} />
+      <FlatList renderItem={chatItemUi} data={item}  />
     </SafeAreaView>
   );
 
   return ui;
 
+
   function chatItemUi({item}) {
     const chatItemUi = (
-      <TouchableOpacity
-        style={style.chatItem}
-        onPress={() => {
-            var obj = {
-                name:item.name,
-                id: item.id,
-                url :item.profile_url
-            }
-          navigation.navigate('Msg',obj);
-        }}>
+      <TouchableOpacity style={style.chatItem} onPress={()=>{
+      navigation.navigate('SignUp');
+
+      }}>
         <Image
           source={{
-            uri: 'http://10.0.2.2/viva_react_cht/' + item.profile_url,
+            uri: 'http://10.0.2.2/viva_react_cht/'+item.profile_url,
           }}
           style={style.image}
         />
@@ -75,17 +70,15 @@ function ChatHome({navigation}) {
           <Text style={{fontSize: 18, fontWeight: 'bold', color: '#000'}}>
             {item.name}
           </Text>
-          <Text numberOfLines={1} style={{color: '#0008',fontSize:15}}>
-          {item.count == 0 ? check  :null}  {item.msg}
+          <Text numberOfLines={1} style={{color: '#0008'}}>
+            {item.msg}
           </Text>
         </View>
         <View style={style.therdView}>
-        <Text> {item.count != 0 ? item.time : null}</Text>
-          <View style={item.count != 0 ? style.msgCont : null}>
-            <Text style={{fontWeight:"bold",color:"#000",padding:1,}}>
-              {item.count != 0 ? item.count : null}
-            </Text>
-          </View>
+          <Text> {item.count != 0 ? item.time : null}</Text>
+          <Text>
+          {item.count != 0 ? item.count : null}
+          </Text>
         </View>
       </TouchableOpacity>
     );

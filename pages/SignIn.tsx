@@ -2,12 +2,19 @@ import {Alert, Image, SafeAreaView, Text, TextInput, View} from 'react-native';
 import style from '../CSS/SignInCSS';
 import {Shadow} from 'react-native-shadow-2';
 import IconUser from 'react-native-vector-icons/Entypo';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {TouchableWithoutFeedback} from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn({navigation}) {
+  async function checkuser() {
+    var user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      navigation.navigate('Contact');
+    }
+  }
+  setTimeout(checkuser,3000);
   const User = <IconUser name="user" size={18} color="#0008" />;
   const adduser = <IconUser name="add-user" size={18} color="#0008" />;
   const [showAlert, setShowAlert] = useState(false);
@@ -127,7 +134,9 @@ function SignIn({navigation}) {
                     setConformBtn(jsobj.btn);
                     setConformBtnColor(jsobj.color);
                     if (jsobj.msg == 'Loging Sucess') {
-                      setInterval(gotomain, 3000);
+                      // gotomain()
+                      setTimeout(gotomain,4000);
+                      // setInterval(gotomain, 5000);
                     }
                   }
                 };
@@ -169,8 +178,6 @@ function SignIn({navigation}) {
       <Text>Develope by Virul.n</Text>
     </SafeAreaView>
   );
-
-  function sendRequest() {}
   return ui;
 }
 
