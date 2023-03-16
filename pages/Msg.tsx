@@ -16,11 +16,25 @@ import {Dimensions} from 'react-native';
 
 export default function Msg({route, navigation}) {
   const windowWidth = Dimensions.get('window').width;
-  const maxMsgWidth = 0.5 * windowWidth;
+  const maxMsgWidth = 0.7 * windowWidth;
   const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 33, 40]);
-  const [message, setmessage] = useState('hehrhrhhrhrhrhrhrhrhhrhrhrhlo');
+  const [message, setmessage] = useState('hello mello masmelo00oooo');
   const Left = <Icon name="left" size={20} style={{color: '#0008'}} />;
-  const Send = <Icon2 name='ios-send' size={10} style={{color: '#0008'}} />
+  const Check = (
+    <Icon2
+      name="checkmark"
+      size={14}
+      style={{color: '#0008', start: 8, marginRight: 0}}
+    />
+  );
+  const Check2 = (
+    <Icon2
+      name="checkmark"
+      size={14}
+      style={{color: '#0008', marginRight: 0}}
+    />
+  );
+
   return (
     <SafeAreaView style={style.body}>
       <View style={style.Main}>
@@ -54,7 +68,7 @@ export default function Msg({route, navigation}) {
           />
         </View>
         <TouchableOpacity style={style.sendButton}>
-        <Icon2 name='ios-send' size={15} style={{color: '#0008'}} />
+          <Icon2 name="ios-send" size={15} style={{color: '#0008'}} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -62,12 +76,16 @@ export default function Msg({route, navigation}) {
 
   function FlatListItemUi() {
     return (
-      <View style={[style.msgViewLeft, {maxWidth: maxMsgWidth}]}>
+      <View style={[style.msgViewRight, {maxWidth: maxMsgWidth}]}>
         <Text lineBreakMode="head" numberOfLines={200} style={style.msgtext}>
           {message}
         </Text>
         <View style={style.timeView}>
           <Text style={style.timeText}>9.46AM</Text>
+          <View style={{flexDirection: 'row'}}>
+            {1 > 0 ? Check : null}
+            {Check2}
+          </View>
         </View>
       </View>
     );

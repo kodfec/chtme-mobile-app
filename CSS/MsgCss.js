@@ -9,7 +9,7 @@ const style = StyleSheet.create({
     backgroundColor: 'red',
     height: 65,
     flexDirection: 'row',
-    backgroundColor: '#EDF1D6',
+    backgroundColor: 'gray',
   },
   image: {
     width: 55,
@@ -34,7 +34,7 @@ const style = StyleSheet.create({
   },
   msgViewLeft: {
     top:6,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'gray',
     borderRadius: 15,
     padding: 12,
     marginHorizontal:8,
@@ -43,7 +43,7 @@ const style = StyleSheet.create({
   },
   msgViewRight: {
     top:6,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#3f91b0',
     borderRadius: 15,
     padding: 12,
     marginHorizontal:8,
@@ -52,21 +52,24 @@ const style = StyleSheet.create({
   },
   msgtext:{
     color: 'black',
+    marginRight:"25%",
     fontSize: 16,
+    marginBottom:4,
   },
   timeView: {
+    flexDirection:"row",
     position: 'absolute',
-    bottom: 10,
-    right: 30,
+    bottom: "4%",
+    right: "9%",
   },
   timeText: {
-    fontSize: 13,
-    color: 'gray',
+    color:"#0007",
+    fontSize: 13, 
   },
   sendingAreaContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f6f6f6',
+    // backgroundColor: '#EDF1D6',
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
@@ -87,7 +90,7 @@ const style = StyleSheet.create({
   sendButton: {
     backgroundColor: '#3f51b5',
     borderRadius: 24,
-    paddingVertical: 8,
+    paddingVertical: 16,
     paddingHorizontal: 16,
     alignItems: 'center',
   },
