@@ -54,13 +54,13 @@ const style = StyleSheet.create({
     color: 'black',
     marginRight:"25%",
     fontSize: 16,
-    marginBottom:4,
+    marginBottom:6,
   },
   timeView: {
     flexDirection:"row",
     position: 'absolute',
     bottom: "4%",
-    right: "9%",
+    right: "4%",
   },
   timeText: {
     color:"#0007",

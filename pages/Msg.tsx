@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   Pressable,
@@ -11,14 +12,15 @@ import {
 import style from '../CSS/MsgCss';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Msg({route, navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const maxMsgWidth = 0.7 * windowWidth;
-  const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 33, 40]);
-  const [message, setmessage] = useState('hello mello masmelo00oooo');
+  const [data, setData] = useState([]);
+  const [message, setmessage] = useState('heloo mello mass melao');
   const Left = <Icon name="left" size={20} style={{color: '#0008'}} />;
   const Check = (
     <Icon2
@@ -34,6 +36,31 @@ export default function Msg({route, navigation}) {
       style={{color: '#0008', marginRight: 0}}
     />
   );
+
+  async function sendRequest() {
+    const userJSON = await AsyncStorage.getItem('user');
+    var userJS = JSON.parse(userJSON);
+    var form = new FormData();
+    form.append('from_user_id', userJS.id);
+    form.append('to_user_id', route.params.id);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        // console.log("response",xhttp.responseText);
+        var jsresponse = JSON.parse(xhttp.responseText);
+        setData(jsresponse);
+      }
+    };
+    xhttp.open('POST', 'http://10.0.2.2/viva_react_cht/msgLoad.php', true);
+    xhttp.send(form);
+  }
+
+  function start() {
+    setInterval(sendRequest, 100);
+  }
+
+  useEffect(start, []);
 
   return (
     <SafeAreaView style={style.body}>
@@ -74,17 +101,22 @@ export default function Msg({route, navigation}) {
     </SafeAreaView>
   );
 
-  function FlatListItemUi() {
+  function FlatListItemUi({item}) {
     return (
-      <View style={[style.msgViewRight, {maxWidth: maxMsgWidth}]}>
+      <View
+        style={
+          item.side == 'Left'
+            ? [style.msgViewLeft, {maxWidth: maxMsgWidth}]
+            : [style.msgViewRight, {maxWidth: maxMsgWidth}]
+        }>
         <Text lineBreakMode="head" numberOfLines={200} style={style.msgtext}>
-          {message}
+          {item.msg}
         </Text>
         <View style={style.timeView}>
-          <Text style={style.timeText}>9.46AM</Text>
+          <Text style={style.timeText}>{item.time}</Text>
           <View style={{flexDirection: 'row'}}>
-            {1 > 0 ? Check : null}
-            {Check2}
+            {item.side == 'Right' && item.status == 3 ? Check : null}
+            {item.side == 'Right' ? Check2 : null}
           </View>
         </View>
       </View>

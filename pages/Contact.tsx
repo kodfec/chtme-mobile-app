@@ -10,11 +10,11 @@ import {
 import Header from '../components/Header';
 import style from '../CSS/ChatHome';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ChatHome({navigation}) {
-    const check = <Icon name="check" size={15} style={{color: '#0008'}} />
+  const check = <Icon name="check" size={15} style={{color: '#0008'}} />;
 
   const [item, Setitem] = useState([1, 2, 3]);
 
@@ -58,12 +58,12 @@ function ChatHome({navigation}) {
       <TouchableOpacity
         style={style.chatItem}
         onPress={() => {
-            var obj = {
-                name:item.name,
-                id: item.id,
-                url :item.profile_url
-            }
-          navigation.navigate('Msg',obj);
+          var obj = {
+            name: item.name,
+            id: item.id,
+            url: item.profile_url,
+          };
+          navigation.navigate('Msg', obj);
         }}>
         <Image
           source={{
@@ -75,14 +75,14 @@ function ChatHome({navigation}) {
           <Text style={{fontSize: 18, fontWeight: 'bold', color: '#000'}}>
             {item.name}
           </Text>
-          <Text numberOfLines={1} style={{color: '#0008',fontSize:15}}>
-          {item.count == 0 ? check  :null}  {item.msg}
+          <Text numberOfLines={1} style={{color: '#0008', fontSize: 15}}>
+            {item.count == 0 ? null : check} {item.msg}
           </Text>
         </View>
         <View style={style.therdView}>
-        <Text> {item.count != 0 ? item.time : null}</Text>
+          <Text> {item.count != 0 ? item.time : null}</Text>
           <View style={item.count != 0 ? style.msgCont : null}>
-            <Text style={{fontWeight:"bold",color:"#000",padding:1,}}>
+            <Text style={{fontWeight: 'bold', color: '#000', padding: 1}}>
               {item.count != 0 ? item.count : null}
             </Text>
           </View>
