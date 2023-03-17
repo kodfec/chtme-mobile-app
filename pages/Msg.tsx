@@ -2,6 +2,7 @@ import {
   Alert,
   FlatList,
   Image,
+  Modal,
   Pressable,
   SafeAreaView,
   Text,
@@ -36,6 +37,8 @@ export default function Msg({route, navigation}) {
       style={{color: '#0008', marginRight: 0}}
     />
   );
+  const [selectedMsg, setSelectedMsg] = useState(null);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   async function sendRequest() {
     const userJSON = await AsyncStorage.getItem('user');
@@ -96,24 +99,26 @@ export default function Msg({route, navigation}) {
             value={message}
           />
         </View>
-        <TouchableOpacity style={style.sendButton} onPress={async ()=>{
+        <TouchableOpacity
+          style={style.sendButton}
+          onPress={async () => {
             const userJSON = await AsyncStorage.getItem('user');
             var userJS = JSON.parse(userJSON);
             var form = new FormData();
             form.append('from_user_id', userJS.id);
             form.append('to_user_id', route.params.id);
-            form.append("msg", message);
+            form.append('msg', message);
 
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = ()=>{
-                if(xhttp.readyState == 4 && xhttp.status == 200){
-                    // Alert.alert("Response",xhttp.responseText);
-                    setmessage('');
-                }
-            }
-            xhttp.open("POST","http://10.0.2.2/viva_react_cht/saveChat.php");
+            xhttp.onreadystatechange = () => {
+              if (xhttp.readyState == 4 && xhttp.status == 200) {
+                // Alert.alert("Response",xhttp.responseText);
+                setmessage('');
+              }
+            };
+            xhttp.open('POST', 'http://10.0.2.2/viva_react_cht/saveChat.php');
             xhttp.send(form);
-        }}>
+          }}>
           <Icon2 name="ios-send" size={15} style={{color: '#0008'}} />
         </TouchableOpacity>
       </View>
@@ -122,12 +127,64 @@ export default function Msg({route, navigation}) {
 
   function FlatListItemUi({item}) {
     return (
-      <View
+      <TouchableOpacity
+        onLongPress={() => {
+          setSelectedMsg(item);
+          setDeleteModalVisible(true);
+        }}
         style={
           item.side == 'Left'
             ? [style.msgViewLeft, {maxWidth: maxMsgWidth}]
             : [style.msgViewRight, {maxWidth: maxMsgWidth}]
         }>
+        <Modal
+          visible={deleteModalVisible}
+          transparent={true}
+          animationType="fade">
+          <View style={style.modalWrapper}>
+            <View style={style.modalContent}>
+              <Text style={style.modalTitle}>Delete Message</Text>
+              <Text
+                style={
+                  style.modalText
+                }>{`Are you sure you want to delete this ?`}</Text>
+              <View style={style.modalButtons}>
+                <TouchableOpacity
+                  onPress={() => setDeleteModalVisible(false)}
+                  style={style.modalButton}>
+                  <Text
+                    style={[style.modalButtonText, style.modalButtonCancel]}>
+                    No
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={async ({iten})=>{
+                        const userJSON = await AsyncStorage.getItem('user');
+                        var userJS = JSON.parse(userJSON);
+                        var form = new FormData();
+                        form.append("loged_user_id" , userJS.id);
+                        form.append("msg_id",item.msg_id )
+
+                        var xhttp =  new XMLHttpRequest();
+                        xhttp.onreadystatechange = ()=>{
+                            if(xhttp.readyState == 4 && xhttp.status == 200){
+                        Alert.alert(userJS.id);
+                        setDeleteModalVisible(false);
+                            }
+                        }
+                        xhttp.open("POST","http://10.0.2.2/viva_react_cht/delete.php",true);
+                        xhttp.send(form);
+                    }}
+                  style={style.modalButton}>
+                  <Text
+                    style={[style.modalButtonText, style.modalButtonConfirm]}>
+                    Yes
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
         <Text lineBreakMode="head" numberOfLines={200} style={style.msgtext}>
           {item.msg}
         </Text>
@@ -138,7 +195,7 @@ export default function Msg({route, navigation}) {
             {item.side == 'Right' ? Check2 : null}
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

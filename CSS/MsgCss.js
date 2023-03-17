@@ -98,6 +98,48 @@ const style = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  modalWrapper: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%'
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  modalButton: {
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 5,
+    marginLeft: 10
+  },
+  modalButtonText: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+  modalButtonCancel: {
+    color: '#555'
+  },
+  modalButtonConfirm: {
+    color: 'red'
+  }
+  
 });
 
 export default style;
