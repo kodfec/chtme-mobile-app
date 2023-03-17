@@ -76,7 +76,8 @@ function ChatHome({navigation}) {
             {item.name}
           </Text>
           <Text numberOfLines={1} style={{color: '#0008', fontSize: 15}}>
-            {item.count == 0 ? null : check} {item.msg}
+            {item.user_id == 1 ? check : null}
+            {item.msg}
           </Text>
         </View>
         <View style={style.therdView}>
