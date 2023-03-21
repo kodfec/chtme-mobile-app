@@ -10,10 +10,19 @@ import {
 import Header from '../components/Header';
 import style from '../CSS/ChatHome';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ChatHome({navigation}) {
+  async function checkuser() {
+    var user = await AsyncStorage.getItem('user');
+    if (user == '0') {
+      navigation.navigate('Registration');
+    }
+  }
+  useEffect(() => {
+    setTimeout(checkuser, 3000);
+  });
   const check = <Icon name="check" size={15} style={{color: '#0008'}} />;
 
   const [item, Setitem] = useState([1, 2, 3]);

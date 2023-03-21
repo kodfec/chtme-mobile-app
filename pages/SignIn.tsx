@@ -8,13 +8,6 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn({navigation}) {
-  async function checkuser() {
-    var user = await AsyncStorage.getItem('user');
-    if (user != null) {
-      navigation.navigate('Contact');
-    }
-  }
-  setTimeout(checkuser,3000);
   const User = <IconUser name="user" size={18} color="#0008" />;
   const adduser = <IconUser name="add-user" size={18} color="#0008" />;
   const [showAlert, setShowAlert] = useState(false);

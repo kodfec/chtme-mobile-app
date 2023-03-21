@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {View, Image, Text, TouchableOpacity, Modal} from 'react-native';
 import IconMenu from 'react-native-vector-icons/Entypo';
 import styles from '../CSS/HeaderCss';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Header = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -24,7 +26,9 @@ const Header = () => {
             <TouchableOpacity style={styles.menuItem}>
               <Text>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
+            <TouchableOpacity style={styles.menuItem} onPress={async ()=>{
+                      await AsyncStorage.setItem('user', "0");
+            }}>
               <Text>Sign Out</Text>
             </TouchableOpacity>
           </View>

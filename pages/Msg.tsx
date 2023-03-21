@@ -13,9 +13,11 @@ import {
 import style from '../CSS/MsgCss';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import {useEffect, useState} from 'react';
 import {Dimensions} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Msg({route, navigation}) {
   const windowWidth = Dimensions.get('window').width;
@@ -158,23 +160,27 @@ export default function Msg({route, navigation}) {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={async ({iten})=>{
-                        const userJSON = await AsyncStorage.getItem('user');
-                        var userJS = JSON.parse(userJSON);
-                        var form = new FormData();
-                        form.append("loged_user_id" , userJS.id);
-                        form.append("msg_id",item.msg_id )
+                  onPress={async ({iten}) => {
+                    const userJSON = await AsyncStorage.getItem('user');
+                    var userJS = JSON.parse(userJSON);
+                    var form = new FormData();
+                    form.append('loged_user_id', userJS.id);
+                    form.append('msg_id', item.msg_id);
 
-                        var xhttp =  new XMLHttpRequest();
-                        xhttp.onreadystatechange = ()=>{
-                            if(xhttp.readyState == 4 && xhttp.status == 200){
-                        Alert.alert(userJS.id);
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = () => {
+                      if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        // Alert.alert(item.msg_id);
                         setDeleteModalVisible(false);
-                            }
-                        }
-                        xhttp.open("POST","http://10.0.2.2/viva_react_cht/delete.php",true);
-                        xhttp.send(form);
-                    }}
+                      }
+                    };
+                    xhttp.open(
+                      'POST',
+                      'http://10.0.2.2/viva_react_cht/delete.php',
+                      true,
+                    );
+                    xhttp.send(form);
+                  }}
                   style={style.modalButton}>
                   <Text
                     style={[style.modalButtonText, style.modalButtonConfirm]}>
@@ -186,14 +192,18 @@ export default function Msg({route, navigation}) {
           </View>
         </Modal>
         <Text lineBreakMode="head" numberOfLines={200} style={style.msgtext}>
-          {item.msg}
+          {item.msg_status == 1
+            ?  'This Message Deleted 🚫'
+            : item.msg}
         </Text>
         <View style={style.timeView}>
           <Text style={style.timeText}>{item.time}</Text>
-          <View style={{flexDirection: 'row'}}>
-            {item.side == 'Right' && item.status == 3 ? Check : null}
-            {item.side == 'Right' ? Check2 : null}
-          </View>
+          {item.msg_status != 1 ? (
+            <View style={{flexDirection: 'row'}}>
+              {item.side == 'Right' && item.status == 3 ? Check : null}
+              {item.side == 'Right' ? Check2 : null}
+            </View>
+          ) : null}
         </View>
       </TouchableOpacity>
     );
