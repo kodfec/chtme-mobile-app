@@ -14,6 +14,8 @@ import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ChatHome({navigation}) {
+  const [searchUser, setSearchUser] = useState('');
+
   async function checkuser() {
     var user = await AsyncStorage.getItem('user');
     if (user == '0') {
@@ -30,6 +32,8 @@ function ChatHome({navigation}) {
   async function chtLoad() {
     const userJSON = await AsyncStorage.getItem('user');
     const form = new FormData();
+
+    form.append("userSearch",searchUser);
     form.append('userJSON', userJSON);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
@@ -48,11 +52,13 @@ function ChatHome({navigation}) {
       <Header />
       <View style={style.searchare}>
         <TextInput
+          onChangeText={setSearchUser}
           style={style.searchbar}
           placeholder="Search..."
           placeholderTextColor={'#0008'}
+          onSelectionChange={chtLoad}
         />
-        <TouchableOpacity style={style.icon}>
+        <TouchableOpacity style={style.icon} onPress={chtLoad}>
           <Icon name="search1" size={24} style={{color: '#0008'}} />
         </TouchableOpacity>
       </View>
@@ -61,7 +67,6 @@ function ChatHome({navigation}) {
   );
 
   return ui;
-
   function chatItemUi({item}) {
     const chatItemUi = (
       <TouchableOpacity
